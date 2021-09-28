@@ -18,7 +18,7 @@ public:
         m_age = age;
     }
 
-    void display() {
+    void display() const {
         cout << "名字是: " << m_name << endl
              << "年龄是: " << m_age << endl;
     }

@@ -5,7 +5,7 @@ using namespace std;
 class ProtoType {};
 
 class cloneable : public ProtoType {
-    virtual ProtoType* clone() = 0;
+    virtual ProtoType* clone() const = 0;
 };
 
 class Resume : public cloneable {
@@ -17,11 +17,11 @@ public:
         m_name = name;
         m_age = age;
     }
-    void display() {
+    void display() const {
         cout << "名字是: " << m_name << endl
              << "年龄是: " << m_age << endl;
     }
-    virtual Resume* clone() override {
+    virtual Resume* clone() const override {
         return new Resume(*this);
     }
 };
