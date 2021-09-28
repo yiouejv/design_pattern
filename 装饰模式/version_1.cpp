@@ -9,7 +9,7 @@ public:
     Person() = delete;
     Person(const string& name) : m_name(name) { }
 
-    virtual void Show() {
+    virtual void Show() const {
         cout << "我的名字是: " << m_name << endl;
     }
 };
@@ -27,14 +27,14 @@ public:
     void DecorateTarget(Person* person) {
         this->m_person = person;
     }
-    virtual void Show() = 0;
+    virtual void Show() const = 0;
 };
 
 
 class TShirt : public Decorate {
 public:
     TShirt(const string& name = "T恤") : Decorate(name) { }
-    void Show() override {
+    void Show() const override {
         if (m_person) {
             m_person->Show();
         }
@@ -45,7 +45,7 @@ public:
 class Hat : public Decorate {
 public:
     Hat(const string& name = "帽子") : Decorate(name) { }
-    void Show() override {
+    void Show() const override {
         if (m_person) {
             m_person->Show();
         }
@@ -56,15 +56,18 @@ public:
 
 int main(int argc, char const* argv[])
 {
-    Person *person = new Person("杨小哥");
+    Person* person = new Person("杨小哥");
     //person->Show();
 
-    TShirt *ts = new TShirt;
+    TShirt* ts = new TShirt;
     ts->DecorateTarget(person);
     //ts->Show();
 
-    Hat *hat = new Hat;
+    Hat* hat = new Hat;
     hat->DecorateTarget(ts);
     hat->Show();
+    delete person;
+    delete ts;
+    delete hat;
     return 0;
 }
