@@ -15,8 +15,8 @@ public:
     vector<BaseObserver*> observers;
     string subState;
     string m_name;
-    virtual void Add(BaseObserver*) = 0;
-    virtual void Delete(BaseObserver*) = 0;
+    virtual void Attach(BaseObserver*) = 0;
+    virtual void Detach(BaseObserver*) = 0;
     virtual void Notify() = 0;
 };
 
@@ -26,14 +26,14 @@ public:
         m_name = name;
     };
 
-    virtual void Add(BaseObserver* ob) override {
+    virtual void Attach(BaseObserver* ob) override {
         observers.push_back(ob);
     }
 
-    virtual void Delete(BaseObserver* ob) override {
+    virtual void Detach(BaseObserver* ob) override {
         for (auto iter = observers.begin(); iter != observers.end();) {
             if (*iter == ob) {
-                observers.erase(iter);
+                iter = observers.erase(iter);
             }
             else {
                 ++iter;
@@ -68,9 +68,9 @@ int main(int argc, char const* argv[])
     Observer ob2("ob2");
     SubjectA sub("subjectA");
 
-    sub.Add(&ob1);
-    sub.Add(&ob2);
-    sub.Delete(&ob1);
+    sub.Attach(&ob1);
+    sub.Attach(&ob2);
+    sub.Detach(&ob1);
     sub.subState = "状态改变了";
     sub.Notify();
     return 0;
