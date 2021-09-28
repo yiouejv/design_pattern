@@ -83,5 +83,6 @@ int main(int argc, char const* argv[])
     result = calc->calc(num1, num2);
 
     cout << "两个数的运算结果为: " << result << endl;
+    delete calc;
     return 0;
 }
