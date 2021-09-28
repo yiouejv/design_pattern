@@ -44,7 +44,7 @@ public:
 
 class CashFactory {
 public:
-    static CashSuper* CreateCash(string& discountStr) {
+    static CashSuper* CreateCash(const string& discountStr) {
         if (discountStr == "正常收费") {
             return new CashNormal;
 
@@ -97,5 +97,6 @@ int main(int argc, char const* argv[])
 
     CashSuper* cash = CashFactory::CreateCash(str);
     cout << cash->GetTotalPrice(price, total);
+    delete cash;
     return 0;
 }

@@ -46,7 +46,7 @@ class CashContext {
 private:
     CashSuper* cash;
 public:
-    CashContext(string& discountStr) {
+    CashContext(const string& discountStr) {
         if (discountStr == "正常收费") {
             cash = new CashNormal;
 
@@ -61,6 +61,11 @@ public:
         else {
             // 构造函数不建议抛异常
             throw;
+        }
+    }
+    ~CashContext() {
+        if (cash) {
+            delete cash;
         }
     }
     double ContextInterface(double price, double total) {
