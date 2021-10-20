@@ -62,20 +62,20 @@ public:
 int main(int argc, char const *argv[])
 {
     Composite root("root");
-    Composite compX("composite x");
-    Composite compY("composite y");
-    root.Add(&compX);
-    root.Add(&compY);
+    Composite *compX = new Composite("composite x");
+    Composite *compY = new Composite("composite y");
+    root.Add(compX);
+    root.Add(compY);
 
-    Composite compXX("composite xx");
-    Composite compXY("composite xy");
-    compX.Add(&compXX);
-    compX.Add(&compXY);
+    Leaf *leafXX = new Leaf("leaf xx");
+    Leaf *leafXY = new Leaf("leaf xy");
+    compX->Add(leafXX);
+    compX->Add(leafXY);
 
-    Composite compYX("composite yx");
-    Composite compYY("composite yy");
-    compY.Add(&compYX);
-    compY.Add(&compYY);
+    Leaf *leafYX = new Leaf("leaf yx");
+    Leaf *leafYY = new Leaf("leaf yy");
+    compY->Add(leafYX);
+    compY->Add(leafYY);
 
     root.Display(1);
     root.Work();
